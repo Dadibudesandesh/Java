@@ -1,0 +1,1 @@
+In this program i implement find area of rectangle,circle,squere,trielngle,etc. using methods
