@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home Page</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        display: flex;
+        background-color: #f8f9fa;
+    }
+
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        width: 80px;
+        background-color: #343a40;
+        color: #ffffff;
+        transition: width 0.3s ease;
+        z-index: 10;
+    }
+
+    .sidebar:hover {
+        width: 250px;
+    }
+
+    .sidebar .nav-item {
+        text-align: left;
+    }
+
+    .sidebar .nav-link {
+        color: #ffffff;
+        padding: 15px;
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+    }
+
+    .sidebar .nav-link:hover {
+        background-color: #495057;
+    }
+
+    .sidebar .nav-link i {
+        font-size: 1.5rem;
+        margin-right: 0;
+        transition: margin-right 0.3s ease;
+    }
+
+    .sidebar .nav-link span {
+        opacity: 0;
+        margin-left: 10px;
+        font-size: 1rem;
+        font-weight: 500;
+        transition: opacity 0.3s ease, margin-left 0.3s ease;
+    }
+
+    .sidebar:hover .nav-link span {
+        opacity: 1;
+        margin-left: 10px;
+    }
+
+    .btn-logout {
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80%;
+    }
+
+    .sidebar:hover .btn-logout {
+        opacity: 1;
+    }
+
+    .main-content {
+        margin-left: 80px;
+        padding: 20px;
+        transition: margin-left 0.3s ease;
+        width: calc(100% - 80px);
+    }
+
+    .sidebar:hover + .main-content {
+        margin-left: 250px;
+        width: calc(100% - 250px);
+    }
+
+    .quote-box {
+        background-color: #ffffff;
+        padding: 2rem;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+
+    .quote {
+        font-style: italic;
+        font-size: 1.5rem;
+        color: #343a40;
+    }
+
+    .author {
+        margin-top: 1rem;
+        font-weight: bold;
+        color: #6c757d;
+    }
+  </style>
+</head>
+<body>
+<div class="sidebar">
+  <ul class="nav flex-column">
+    <li class="nav-item">
+      <a class="nav-link active" th:href="@{/student/home}">
+        <i class="fas fa-home"></i>
+        <span>Home</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" th:href="@{/student/newBooks}">
+        <i class="fas fa-book"></i>
+        <span>New Books</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" th:href="@{/student/borrowedBooks}">
+        <i class="fas fa-book-reader"></i>
+        <span>Borrowed Books</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" th:href="@{/student/borrowRequest}">
+        <i class="fas fa-user"></i>
+        <span>Borrow Request</span>
+      </a>
+    </li>
+  </ul>
+  <form action="/logout" method="POST" class="btn-logout">
+    <button type="submit" class="btn btn-outline-danger w-100">Logout</button>
+  </form>
+
+</div>
+<div class="container mt-5">
+  <h2 class="text-center mb-4">📚 My Requests</h2>
+  <div class="table-responsive">
+    <table class="table table-bordered table-hover">
+      <thead class="table-dark">
+      <tr>
+        <th>#</th>
+        <th>Book Title</th>
+<!--        <th>Return Date</th>-->
+        <th>Status</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="request,stat : ${requests}">
+        <td th:text="${stat.count}"></td>
+        <td th:text="${request.book.name}"></td>
+<!--        <td th:text="${request.borrow.return_date}"></td>-->
+        <td>
+                        <span th:text="${request.status}"
+                              class="badge"
+                              th:classappend="${request.status == 'Pending' ? 'bg-warning' : (request.status == 'Approved' ? 'bg-success' : 'bg-danger')}">
+                        </span>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

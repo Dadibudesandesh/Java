@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.com">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Management System - Admin Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+        }
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            width: 80px;
+            background-color: #343a40;
+            color: #ffffff;
+            transition: width 0.3s ease;
+            z-index: 10;
+        }
+
+        .sidebar:hover {
+            width: 250px;
+        }
+
+        .sidebar .nav-item {
+            text-align: left;
+            position: relative;
+        }
+
+        .sidebar .nav-link {
+            color: #ffffff;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+            position: relative;
+        }
+
+        .sidebar .nav-link:hover {
+            background-color: #495057;
+        }
+
+        .sidebar .nav-link i {
+            font-size: 1.5rem;
+            margin-right: 0;
+            transition: margin-right 0.3s ease;
+        }
+
+        .sidebar .nav-link span {
+            opacity: 0;
+            margin-left: 10px;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: opacity 0.3s ease, margin-left 0.3s ease;
+        }
+
+        .btn-logout{
+            opacity:0;
+        }
+
+        .sidebar:hover .btn-logout{
+            opacity:1;
+        }
+
+        .sidebar:hover .nav-link span {
+            opacity: 1;
+            margin-left: 10px;
+        }
+
+
+          ::placeholder {
+            color: #6c757d;
+            opacity: 1;
+        }
+
+          .btn-logout {
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+        }
+
+        .sidebar:hover .btn-logout {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+<div class="sidebar">
+    <ul class="nav flex-column">
+        <li class="nav-item">
+            <a class="nav-link active" th:href="@{/admin/home}">
+                <i class="fas fa-home"></i>
+                <span>Home</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/admin/addStudent}">
+                <i class="fas fa-user-graduate"></i>
+                <span>Add Student</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/admin/manageStudent}">
+                <i class="fas fa-users-cog"></i>
+                <span>Manage Student</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/admin/addBook}">
+                <i class="fas fa-book"></i>
+                <span>Add Books</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/admin/manageBook}">
+                <i class="fas fa-book-open"></i>
+                <span>Manage Books</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/admin/borrowBook}">
+                <i class="fas fa-book-reader"></i>
+                <span>Borrow Book</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/admin/manageBorrow}">
+                <i class="fas fa-book"></i> <!-- Icon for Manage Borrow -->
+                <span>Manage Borrow</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/admin/bookRequests}">
+                <i class="fas fa-chart-bar"></i>
+                <span>Book Request's</span>
+            </a>
+        </li>
+    </ul>
+    <form action="/logout" method="POST" class="btn-logout">
+        <button type="submit" class="btn btn-outline-danger w-100">Logout</button>
+    </form>
+
+</div>
+<div class="container my-4 ">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header text-center">
+                    <h3 class="text-secondary fw-bold">Add Student</h3>
+                </div>
+                <div class="card-body mt-4 ">
+                    <form enctype="multipart/form-data" method="post" th:action="@{/saveStudent}">
+                        <div class="mb-3 row">
+                            <label for="name" class="col-sm-3 col-form-label fw-normal">Name</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control " id="name" placeholder="Enter student name"
+                                       name="name" required>
+                            </div>
+                        </div>
+
+                        <div class="mb-3 row">
+                            <label for="email" class="col-sm-3 col-form-label fw-normal">Email</label>
+                            <div class="col-sm-9">
+                                <input type="email" class="form-control " id="email" placeholder="Enter student email"
+                                       name="email" required>
+                            </div>
+                        </div>
+
+                        <div class="mb-3 row">
+                            <label for="password" class="col-sm-3 col-form-label fw-normal">Password</label>
+                            <div class="col-sm-9">
+                                <input type="password" class="form-control " id="password"
+                                       placeholder="Enter student password" name="password" required>
+                            </div>
+                        </div>
+
+
+                        <div class="mb-3 row">
+                            <label for="mobile" class="col-sm-3 col-form-label fw-normal">Mobile</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control " pattern="\d{1,10}" maxlength="10" id="mobile"
+                                       placeholder="Enter student mobile" name="mobile" required>
+                            </div>
+                        </div>
+
+
+                        <div class="mb-3">
+                            <label class="form-label me-5  fw-normal">Gender</label>
+                            <div class="form-check form-check-inline mb-3 ms-5"> <!-- Adding margin-bottom here -->
+                                <input class="form-check-input" type="radio" name="gender" id="male" value="male">
+                                <label class="form-check-label" for="male">Male</label>
+                            </div>
+                            <div class="form-check form-check-inline mb-3">
+                                <input class="form-check-input" type="radio" name="gender" id="female" value="female">
+                                <label class="form-check-label" for="female">Female</label>
+                            </div>
+                            <div class="form-check form-check-inline mb-3">
+                                <input class="form-check-input" type="radio" name="gender" id="other" value="other">
+                                <label class="form-check-label" for="other">Other</label>
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="dob" class="col-sm-3 col-form-label fw-normal">Date of Birth</label>
+                            <div class="col-sm-9">
+                                <input type="date" class="form-control " id="dob" name="dob" required>
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="classs" class="col-sm-3 col-form-label fw-normal">Class</label>
+                            <div class="col-sm-9">
+                                <select class="form-select" id="classs" name="classs" required>
+                                    <option value="">Select Class</option>
+                                    <option value="BCA I">BCA I</option>
+                                    <option value="BCA II">BCA II</option>
+                                    <option value="BCA III">BCA III</option>
+                                    <option value="BBA I">BBA I</option>
+                                    <option value="BBA II">BBA II</option>
+                                    <option value="BBA III">BBA III</option>
+                                    <option value="MCA I">MCA I</option>
+                                    <option value="MCA II">MCA II</option>
+                                    <option value="MBA I">MBA I</option>
+                                    <option value="MBA II">MBA II</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="role" class="col-sm-3 col-form-label fw-normal">Role</label>
+                            <div class="col-sm-9">
+                                <select class="form-select" id="role" name="role" required>
+                                    <option value="student">Student</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="roll" class="col-sm-3 col-form-label fw-normal">Roll Number</label>
+                            <div class="col-sm-9">
+                                <input type="number" class="form-control " id="roll" name="roll"
+                                       placeholder="Enter student roll number" required>
+                            </div>
+                        </div>
+                        <div class="d-grid gap-2 col-3 mx-auto">
+                            <button class="btn btn-primary" type="submit">Add Student</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    function validateInput() {
+            var inputField = document.getElementById("numberInput");
+            var value = inputField.value;
+
+            if (!/^\d+$/.test(value)) {
+                alert("Please enter a valid number.");
+                inputField.value = "";
+            }
+        }
+
+</script>
+</body>
+</html>
