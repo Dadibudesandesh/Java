@@ -1,0 +1,1 @@
+in this program perform use of static keyword i.e static variable,static method,static block
