@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Admin Statistics</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="/css/styles.css">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        h2, h3 {
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f4f4f4;
+        }
+    </style>
+
+</head>
+<body>
+
+<h2>Library Statistics</h2>
+
+<!-- Books Returned Per Month -->
+<!--<h3>Books Returned Per Month</h3>-->
+<!--<canvas id="returnChart"></canvas>-->
+<!--<script th:inline="javascript">-->
+<!--    var ctx = document.getElementById('returnChart').getContext('2d');-->
+<!--    var returnChart = new Chart(ctx, {-->
+<!--        type: 'bar',-->
+<!--        data: {-->
+<!--            labels: [[${returnedBooksByMonth.keySet()}]],-->
+<!--            datasets: [{-->
+<!--                label: 'Returned Books',-->
+<!--                data: [[${returnedBooksByMonth.values()}]],-->
+<!--                backgroundColor: 'rgba(54, 162, 235, 0.5)',-->
+<!--                borderColor: 'rgba(54, 162, 235, 1)',-->
+<!--                borderWidth: 1-->
+<!--            }]-->
+<!--        }-->
+<!--    });-->
+<!--</script>-->
+
+<!-- Pending Books List -->
+<h3>Pending / Non-Returned Books</h3>
+<table>
+    <tr>
+        <th>Book</th>
+        <th>Borrowed By</th>
+        <th>Borrow Date</th>
+    </tr>
+    <tr th:each="borrow : ${pendingBooks}">
+        <td th:text="${borrow.book.title}"></td>
+        <td th:text="${borrow.student.name}"></td>
+        <td th:text="${borrow.borrowDate}"></td>
+    </tr>
+</table>
+
+<!-- Additional Stats -->
+<h3>Total Statistics</h3>
+<p>Total Borrowed Books: <span th:text="${totalBorrowed}"></span></p>
+<p>Total Returned Books: <span th:text="${totalReturned}"></span></p>
+
+<!-- Most Borrowed Books -->
+<h3>Most Borrowed Books</h3>
+<ul>
+    <li th:each="book : ${mostBorrowedBooks}">
+        <span th:text="${book[0]}"></span> - <span th:text="${book[1]}"></span> times borrowed
+    </li>
+</ul>
+
+<!-- Most Active Borrowers -->
+<h3>Most Active Borrowers</h3>
+<ul>
+    <li th:each="student : ${activeBorrowers}">
+        <span th:text="${student[0]}"></span> - <span th:text="${student[1]}"></span> books borrowed
+    </li>
+</ul>
+
+</body>
+</html>

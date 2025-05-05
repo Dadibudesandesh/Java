@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Student Report</title>
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+</head>
+<body class="bg-light">
+<div class="container mt-5">
+    <div class="card shadow-lg p-4">
+        <h2 class="text-center mb-4 text-primary">Generate Student Report</h2>
+
+        <form id="reportForm" class="text-center">
+            <div class="mb-3">
+                <label for="studentName" class="form-label fw-bold">Enter Student Name:</label>
+                <input type="text" id="studentName" name="studentName"
+                       class="form-control w-50 mx-auto border border-primary"
+                       placeholder="Enter Student Name" required>
+            </div>
+
+            <button type="submit" class="btn btn-success px-4">
+                <i class="bi bi-file-earmark-bar-graph"></i> View Report
+            </button>
+        </form>
+    </div>
+</div>
+
+<!-- Bootstrap & Icons -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+    document.getElementById("reportForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+        const studentName = document.getElementById("studentName").value;
+
+        if (studentName.trim() === "") {
+            Swal.fire("Error", "Please enter a student name!", "error");
+            return;
+        }
+
+        // Redirect to view the report
+        window.location.href = `/reports/student-books-view?studentName=${encodeURIComponent(studentName)}`;
+    });
+</script>
+</body>
+</html>
