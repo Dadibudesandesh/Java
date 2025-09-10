@@ -1,0 +1,37 @@
+// Palindrome Logic
+
+ num = 121
+
+ rev = 0
+ 1--> rev = 1
+ 2--> rev = 12
+ 1--> rev = 121
+
+
+temp = num(121)
+
+while ((1=121 | 2=12 | 3= 1 )temp!=0) {
+
+	int digit=temp%10
+	1--> 1=121%10
+	2--> 2=12%10
+	3--> 1=1%10
+			
+	rev=rev*10+digit
+	1--> 1=0*10+1
+	2--> 12=1*10+2
+	3--> 121=12*10+1
+
+
+	temp=temp/10
+	1--> 12=121/10
+	2--> 1=12/10
+	3--> 0=1/10
+
+}
+
+ if ( num==rev)
+ if( 121 == 121 ) print(palindrome)
+ else print (not palindrome)
+
+

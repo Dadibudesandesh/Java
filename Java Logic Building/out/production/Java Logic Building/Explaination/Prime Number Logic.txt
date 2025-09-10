@@ -1,0 +1,23 @@
+// Prime Number Logic 
+
+num = 18   // first example
+num =  13  // second example
+Boolean = true 
+
+
+for int i=2 ; i<=num/2 ; i++
+     1-----> 2 <= 9 (18/2)
+
+     1-----> 2 <= 6(13/2)
+	
+if( num % i == 0 )
+     1-----> (18%2)  0 == 0   // condition satisfied 18 is not a prime number 
+
+    1-----> (13%2) 1 == 0
+isPrime = false  
+break
+
+
+
+
+
