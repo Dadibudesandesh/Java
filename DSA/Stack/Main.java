@@ -4,23 +4,15 @@ class Stack{
 	
 	Stack(){
 		this.top=-1;
-		this.stack=new int[10];
+		this.stack=new int[5];
 	}
 
-	public int isFull(){
-		if(top==stack.length){
-			return 1;
-		}else{
-			return 0;
-		}
+	public boolean isFull(){
+		return top==stack.length-1;
 	}
 
-	public int isEmpty(){
-		if(top==-1){
-			return 1;
-		}else{
-			return 0;
-		}
+	public boolean isEmpty(){
+		return top==-1;
 	}
 
 	public void push(int data){
@@ -29,6 +21,7 @@ class Stack{
 		}else{
 			top++;
 			stack[top]=data;
+			System.out.println("Data Pushed : "+data);
 		}
 	}
 
@@ -37,19 +30,24 @@ class Stack{
 		if(isEmpty()){
 			System.out.print("Stack is Empty.....!");
 		}else{
-			System.out.println("Data Poped : ",+this.stack[top]);
+			System.out.println("Data Poped : "+stack[top]);
 			top--;
 		}
 	}
 
 	public void display(){
-		for(int i : stack){
-			System.out.println(i);
-		}
 
+		if(top==-1){
+			System.out.println("Stack is empty....!");
+			return;
+		}else{
+			for(int i=0;i<=top;i++){
+				System.out.println(stack[i]);
+			}
+		}
+		
 	}
 }
-
 
 class Main{
 
@@ -59,7 +57,10 @@ class Main{
 		st.push(20);
 		st.push(30);
 		st.push(40);
-
+		st.display();
+		st.pop();
+		st.pop();
+		st.pop();
 		st.display();
 	}
 }
