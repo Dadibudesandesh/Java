@@ -1,8 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-21"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-21">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="src" path="src/main/java"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry kind="lib" path="C:/Users/Student/Downloads/tomcat-servlet-api-9.0.89.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Student/Downloads/javax.servlet-api-3.0.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Student/Downloads/drive-download-20260327T073121Z-3-001/javax.servlet-api_3.1.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Student/Downloads/drive-download-20260327T073121Z-3-001/jsp-api.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Student/Downloads/drive-download-20260327T073121Z-3-001/mysql-connector-java-5.1.19-bin.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Student/Downloads/drive-download-20260327T073121Z-3-001/servlet.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Student/Downloads/drive-download-20260327T073121Z-3-001/servlet-api - Copy.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
